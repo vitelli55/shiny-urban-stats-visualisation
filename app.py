@@ -14,16 +14,11 @@ with open(REGIONS_PATH, "r", encoding="utf-8") as f:
    geodata = json.load(f)
 
 
-
 DF_COORDS = (-15.807616488540408, -47.9509412304779)
 
 
 app_ui = ui.page_fillable(
     output_widget("map", width="100%", height="100%"),
-
-
-
-
 )
 
 def random_color(feature):
@@ -32,11 +27,9 @@ def random_color(feature):
         'fillColor': random.choice(['red', 'yellow', 'green', 'orange']),
     }
 
-def handle_click(**kwargs):
+def handle_click(**kwargs): #kwargs allows passing a variable number of keyword args to a function
     properties = kwargs.get("properties", {})
     print("Selected:", properties)
-
-
 
 def server(input, output, session):
 
