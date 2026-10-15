@@ -17,9 +17,41 @@ with open(REGIONS_PATH, "r", encoding="utf-8") as f:
 DF_COORDS = (-15.807616488540408, -47.9509412304779)
 
 
+# app_ui = ui.page_sidebar(
+    
+#     ui.sidebar(
+#         ui.h3("Info"),
+#             ),
+            
+
+#     output_widget("map", width="100%", height="100%"),
+    
+# )
+
+# app_ui = ui.page_fillable(
+
+#     output_widget("map", width="100%", height="100%"),
+# )
+
 app_ui = ui.page_fillable(
-    output_widget("map", width="100%", height="100%"),
+
+    ui.layout_sidebar(
+
+        ui.sidebar(
+            ui.h3("Info"),
+            width="300px",
+            open="closed",
+        ),
+
+        output_widget("map", width="100%", height="100%"),
+
+        fillable=True,
+    )
+
 )
+
+
+
 
 def random_color(feature):
     return {
