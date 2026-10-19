@@ -1,4 +1,4 @@
-from shiny import reactive, App, ui
+from shiny import reactive, App, ui, render
 from shinywidgets import output_widget, render_widget
 import ipyleaflet as ipyl
 
@@ -14,6 +14,9 @@ with open(REGIONS_PATH, "r", encoding="utf-8") as f:
 
 DF_COORDS = (-15.807616488540408, -47.9509412304779)
 
+region_info = reactive.value({})
+
+
 # --------- UI
 
 app_ui = ui.page_fillable(
@@ -21,9 +24,11 @@ app_ui = ui.page_fillable(
     ui.layout_sidebar(
 
         ui.sidebar(
-            ui.h3("Info"),
+            ui.output_ui("region_info_display"),
+
             width="300px",
             open="closed",
+            id="info_sidebar",
         ),
 
         output_widget("map", width="100%", height="100%"),
@@ -42,13 +47,36 @@ def random_color(feature):
         'fillColor': random.choice(['red', 'yellow', 'green', 'orange']),
     }
 
-def handle_click(**kwargs): #kwargs allows passing a variable number of keyword args to a function
-    properties = kwargs.get("properties", {})
-    print("Selected:", properties)
+
 
 # ------------- SERVER
 
 def server(input, output, session):
+
+    @render.ui
+    def region_info_display():
+        selected_region = region_info.get() # dictionary of the properties of selected region
+
+        name = selected_region['name']
+
+        return ui.h3(name)
+
+
+
+    def handle_click(**kwargs): #kwargs allows passing a variable number of keyword args to a function
+
+        properties = kwargs.get("properties", {})
+        #print("Selected:", properties)
+
+        region_info.set(properties)
+        
+    
+        if input.info_sidebar() is False:
+            #print("sidebar is closed")
+            ui.update_sidebar("info_sidebar", show=True)
+
+        
+        
 
     @render_widget
     def map():
