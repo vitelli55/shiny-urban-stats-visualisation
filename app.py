@@ -66,9 +66,13 @@ def server(input, output, session):
     def handle_click(**kwargs): #kwargs allows passing a variable number of keyword args to a function
 
         properties = kwargs.get("properties", {})
-        #print("Selected:", properties)
+        coords = kwargs.get("coordinates", {})
 
+
+        print("Selected:", properties)
+        
         region_info.set(properties)
+        map.widget.center = coords
         
     
         if input.info_sidebar() is False:
