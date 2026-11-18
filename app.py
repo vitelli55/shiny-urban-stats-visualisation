@@ -19,22 +19,28 @@ region_info = reactive.value({})
 
 # --------- UI
 
-app_ui = ui.page_fillable(
+#app_ui = ui.page_fillable(
+app_ui = ui.page_navbar(
+    # HOME PANEL
+    # Current issue: map and sidebar only occupy a small section of the screen
+    ui.nav_panel(
+        "Home",
+        ui.layout_sidebar(
+            ui.sidebar(
+                ui.output_ui("region_info_display"),
 
-    ui.layout_sidebar(
+                width="300px",
+                open="closed",
+                id="info_sidebar",
+            ),
 
-        ui.sidebar(
-            ui.output_ui("region_info_display"),
+            output_widget("map", width="100%", height="100%"),
 
-            width="300px",
-            open="closed",
-            id="info_sidebar",
-        ),
+            fillable=True,
+        )),
+        ui.nav_panel("Extra", "WIP"),
+        fillable=True
 
-        output_widget("map", width="100%", height="100%"),
-
-        fillable=True,
-    )
 
 )
 
@@ -70,6 +76,7 @@ def server(input, output, session):
 
 
         print("Selected:", properties)
+        #print(kwargs.keys())
         
         region_info.set(properties)
         map.widget.center = coords
