@@ -8,7 +8,7 @@ from pathlib import Path
 import random
 
 #loading geojson data
-REGIONS_PATH = Path("geojson-data/distrito_federal.geo.json")
+REGIONS_PATH = Path("geojson/distrito_federal.geo.json")
 with open(REGIONS_PATH, "r", encoding="utf-8") as f:
    geodata = json.load(f)
 

@@ -31,6 +31,5 @@ wheels/
 *.manifest
 *.spec
 
-geojson-data/test-data-europe.json
-__pycache__/app.cpython-314.pyc
-scripts/test.py
+geojson/divided-files/
+data/df/raw
