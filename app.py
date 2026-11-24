@@ -46,11 +46,10 @@ app_ui = ui.page_navbar(
 
 # ------------- HELPER FUNCTIONS
 
-
 def random_color(feature):
     return {
         'color': 'black',
-        'fillColor': random.choice(['red', 'yellow', 'green', 'orange']),
+        'fillColor': random.choice(['red', 'yellow', 'green', 'orange', 'blue', 'purple', 'pink']),
     }
 
 
@@ -65,7 +64,21 @@ def server(input, output, session):
 
         name = selected_region['name']
 
-        return ui.h3(name)
+        population = selected_region['population']
+        demographic_density = selected_region['demographic_density']
+        avg_household_size = selected_region['avg_household_size']
+
+        VALUE_BOX_HEIGHT = "150px"
+
+        display = ui.TagList(
+            ui.h3(name),
+            ui.value_box("Population", f"{population} people", theme='blue', fill=True, height=VALUE_BOX_HEIGHT),
+            ui.value_box("Pop. Density", f"{demographic_density} people per km^2", theme='cyan',fill=True, height=VALUE_BOX_HEIGHT),
+            ui.value_box("Avg. Household Size", f"{avg_household_size} people",theme='teal', fill=True, height=VALUE_BOX_HEIGHT),
+
+        )
+
+        return display
 
 
 
@@ -94,7 +107,8 @@ def server(input, output, session):
         m = ipyl.Map(
             center = DF_COORDS, 
             zoom=10.5,
-            scroll_wheel_zoom = True
+            scroll_wheel_zoom = True,
+            #min_zoom = 1000
             )
 
 
