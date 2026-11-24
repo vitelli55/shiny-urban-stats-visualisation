@@ -14,6 +14,10 @@ The project combines public survey microdata, regional statistics, and geographi
 -   Present the results through an interactive map, where selecting a region reveals its indicators.
 -   Keep data processing separate from the visualisation application so that the statistics can be regenerated independently.
 
+## Running the visualisation
+
+To be deployed!!
+
 ## Current data sources
 
 ### PDAD (Pesquisa Distrital por Amostra de Domicílios)
@@ -50,7 +54,3 @@ For a category (c), the weighted percentage is:
 
 \[ P_w(c) = 100 \\times \\frac{\\sum\_{i \\in c} w_i}{\\sum\_{i \\in
 valid} w_i} \]
-
-## Running the visualisation
-
-To be deployed!!

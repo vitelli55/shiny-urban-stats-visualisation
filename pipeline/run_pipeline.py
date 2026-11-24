@@ -52,7 +52,7 @@ def run_pipeline():
     dom_cleaned = clean_dataset(domicilios, DOMICILIO_VARIABLES, REGION_COLUMN, DOM_WEIGHT_COLUMN)
     dom_cleaned.to_parquet(PROCESSED_DIR / "domicilios_cleaned.parquet", index=False)
 
-    logger.info("Calculating statistics for moradores.csv")
+    logger.info("Calculating statistics for domicilios.csv")
     dom_numeric, dom_categorical = calculate_all_statistics(dom_cleaned, DOMICILIO_VARIABLES, REGION_COLUMN, DOM_WEIGHT_COLUMN, MIN_CELL_SIZE)
     dom_numeric.to_csv(
         OUTPUT_DIR / "domicilios_numeric_statistics.csv",
